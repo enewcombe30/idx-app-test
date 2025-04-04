@@ -1,8 +1,12 @@
 import { configureStore} from "@reduxjs/toolkit";
 import counterReducer from "./counter";
+import todoReducer from "./todos";
 
 const store = configureStore({
-    reducer: { counter: counterReducer}
+    reducer: { 
+        counter: counterReducer, 
+        todos: todoReducer
+    }
 })
 
 export type AppStore = typeof store
