@@ -1,34 +1,22 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "./state/store";
+import { increment, decrement, reset } from "./state/counter";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const count = useSelector((state: RootState) => state.counter);
+  const counterDispatch = useDispatch<AppDispatch>()
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <h1 className="underline text-3xl font-bold mb-8 w-fit mx-auto">New React Query + Redux project</h1>
+      <div className='w-fit mx-auto text-4xl font-bold'>{count}</div>
+      <div className='flex space-x-4 w-fit mx-auto'> 
+        <button className="w-fit h-fit p-2 border-grey-300 border-2 cursor-pointer" onClick={() => counterDispatch(increment())}>Increment</button>
+        <button className="w-fit h-fit p-2 border-grey-300 border-2 cursor-pointer" onClick={() => counterDispatch(decrement())}>Decrement</button>
+        <button className="w-fit h-fit p-2 border-grey-300 border-2 cursor-pointer" onClick={() => counterDispatch(reset())}>Reset</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="text-blue-500">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   );
 }
 
